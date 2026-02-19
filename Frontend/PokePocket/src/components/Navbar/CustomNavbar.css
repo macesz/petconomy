@@ -1,0 +1,11 @@
+/* @import "tailwindcss";
+.custom-nav .nav-link:hover,
+.custom-nav .dropdown-item:hover {
+  background-color: black !important;
+  color: white !important;
+}
+
+.custom-nav .nav-link{
+  width: 120px;
+    text-align: center;
+} */

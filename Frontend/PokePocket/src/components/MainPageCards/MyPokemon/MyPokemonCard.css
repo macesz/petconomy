@@ -1,0 +1,25 @@
+.gyara h1:hover {
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhT9AXpUqUyMjILJ9qn9PDvXpdXE-iqbc-HMXHfU04s6rJ0fbT);
+    background-repeat: repeat-x;
+    background-position: left center;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: animate 10s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        background-position: 0% center;
+    }
+    100% {
+        background-position: 100% center;
+    }
+}
+
+.water::after {
+    background-image: url("../../../assets/splash.png");
+}
+
+  
+
+  

@@ -1,0 +1,27 @@
+
+.whitebox{
+    padding: 10px;
+    border-radius: 47px;
+    padding-right: 12px;
+    -webkit-box-shadow: 0 0 20px #000000;
+}
+
+.regImgDiv{
+    border-radius: 3rem;
+}
+
+.form-container {
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1;
+  }
+  
+  .fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .fade-in {
+    opacity: 1;
+  }
+
+

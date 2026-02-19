@@ -1,0 +1,31 @@
+body{
+    height: 100vh;
+    /* background: rgb(168,197,211); */
+    background: linear-gradient(135deg, rgba(168,197,211,1) 10%, rgba(254,237,211,1) 70%, rgba(39,64,71,1) 100%);
+}
+
+.whitebox{
+    padding: 10px;
+    border-radius: 47px;
+    padding-right: 12px;
+    -webkit-box-shadow: 0 0 20px #000000;
+}
+
+.form-container {
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1;
+}
+
+.fade-in {
+    opacity: 1;
+}
+
+.whitebox {
+    padding: 10px;
+    padding-right: 12px;
+    -webkit-box-shadow: 0 0 20px #000000;
+}
+
+.regImgDiv {
+    border-radius: 3rem;
+}

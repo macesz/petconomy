@@ -1,0 +1,28 @@
+
+.bg-hover-animate {
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.bg-hover-animate::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 100%; /* Kezdetben teljesen lent van */
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 1; /* Megjelenítés biztosítása */
+    transition: top 0.8s ease-in-out;
+}
+
+.bg-hover-animate:hover::after {
+    top: 50%; /* Felcsúszik hover-re */
+}
+
+  
+
+  

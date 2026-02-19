@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@plugin "daisyui"{
+    themes: light --default;
+}
+
+@theme {
+    --color-pokeball: #ff1616;
+}
+
+html{
+    height: 100vh;
+    /* background: rgb(168,197,211); */
+    background: linear-gradient(135deg, rgba(168,197,211,1) 10%, rgba(254,237,211,1) 70%, rgba(39,64,71,1) 100%);
+}

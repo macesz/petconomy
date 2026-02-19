@@ -1,0 +1,21 @@
+.lightning::after {
+    background-image: url("../../../assets/lighting.png");
+}
+
+.pika h1:hover {
+    background-image: url(https://as1.ftcdn.net/jpg/01/76/24/32/1000_F_176243244_BJSHvMHz5wPGCUmvoxe1fFiQz0De6YV8.jpg);
+    background-repeat: repeat-x;
+    background-position: left center;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: animate 10s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        background-position: 0% center;
+    }
+    100% {
+        background-position: 100% center;
+    }
+}

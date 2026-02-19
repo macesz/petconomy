@@ -1,0 +1,27 @@
+.gyara h1:hover {
+    background-image: url("../../../assets/fire.png");
+    background-repeat: repeat-x;
+    background-position: left center;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: animate 100s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        background-position: 0% center;
+    }
+    100% {
+        background-position: 100% center;
+    }
+}
+
+.fire::after {
+    background-image: url("../../../assets/fire.png");
+    background-position-y: bottom;
+}
+
+.chari{
+    background-size: cover;
+    background-position-y: top;
+}
