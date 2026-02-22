@@ -1,0 +1,9 @@
+# Database configuration
+POSTGRES_USER=<your-postgres-username>          # Default: postgres
+POSTGRES_PASSWORD=<your-postgres-password>      # Default: postgres
+POSTGRES_DB=<your-database-name>               # Default: petconomy
+
+# Port configuration
+DB_PORT=<database-port>                        # Default: 5432
+BACKEND_PORT=<backend-port>                    # Default: 8080
+FRONTEND_PORT=<frontend-port>                  # Default: 5173
