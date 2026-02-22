@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface PetRepository extends JpaRepository<Pet, Long> {
+public interface PatRepository extends JpaRepository<Pet, Long> {
     Optional<Pet> findPetByOwnerId(Long id);
 }

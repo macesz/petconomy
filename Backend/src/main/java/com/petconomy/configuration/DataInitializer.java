@@ -4,7 +4,7 @@ import com.petconomy.model.transaction.Category;
 import com.petconomy.model.user.Member;
 import com.petconomy.repository.CategoryRepository;
 import com.petconomy.repository.MemberRepository;
-import com.petconomy.repository.PetRepository;
+import com.petconomy.repository.PatRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,7 +31,7 @@ public class DataInitializer {
 
     @Bean
     @Order(2)
-    public CommandLineRunner initDummyMember(MemberRepository memberRepository, PetRepository petRepository) {
+    public CommandLineRunner initDummyMember(MemberRepository memberRepository, PatRepository patRepository) {
         return args -> {
             if (memberRepository.count() == 0) {
                 Member testUser = new Member();
@@ -47,7 +47,7 @@ public class DataInitializer {
                 starterPet.setOwner(testUser);
                 starterPet.setExperience(50); // Halfway to level 2!
                 starterPet.setPetGold(100);
-                petRepository.save(starterPet);
+                patRepository.save(starterPet);
             }
         };
     }

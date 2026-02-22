@@ -3,7 +3,7 @@ import com.petconomy.model.transaction.Category;
 import com.petconomy.model.transaction.Transaction;
 import com.petconomy.model.user.Member;
 import com.petconomy.repository.MemberRepository;
-import com.petconomy.repository.PetRepository;
+import com.petconomy.repository.PatRepository;
 import com.petconomy.repository.TransactionRepository;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -16,12 +16,12 @@ import java.util.List;
 public class MonthlyRewardService {
 
     private final MemberRepository memberRepository;
-    private  final PetRepository petRepository;
+    private  final PatRepository petRepository;
     private final TransactionRepository transactionRepository;
 
-    public MonthlyRewardService(MemberRepository memberRepository, PetRepository petRepository, TransactionRepository transactionRepository) {
+    public MonthlyRewardService(MemberRepository memberRepository, PatRepository patRepository, TransactionRepository transactionRepository) {
         this.memberRepository = memberRepository;
-        this.petRepository = petRepository;
+        this.petRepository = patRepository;
         this.transactionRepository = transactionRepository;
     }
 
