@@ -1,8 +1,8 @@
 import React from "react";
 import gyarados from "../../../assets/gyarados.png";
-import "./MyPokemonCard.css";
+import "./MyPatCard.css";
 
-function MyPokemonCard({ cardClasses, navigate }) {
+function MyPatCard({ cardClasses, navigate }) {
   return (
     <div
       onClick={() => navigate("/main/mypokemon")}
@@ -19,4 +19,4 @@ function MyPokemonCard({ cardClasses, navigate }) {
   );
 }
 
-export default MyPokemonCard;
+export default MyPatCard;

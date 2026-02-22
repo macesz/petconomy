@@ -4,7 +4,7 @@ import { picture } from "framer-motion/client";
 import Evolution from "../../components/MyPokemon/Evolution";
 import RazBerry from "../../assets/razberry.webp"
 
-function MyPokemon() {
+function MyPet() {
   const [myPokemon, setMyPokemon] = useState({
     experience: 0,
     happiness: 70,
@@ -124,4 +124,4 @@ function MyPokemon() {
   );
 }
 
-export default MyPokemon;
+export default MyPet;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Pokemon(props){
+function Pet(props){
   return (
     <div className="carousel-item glass">
         <button className="btn btn-accent btn-outline hover-light">{props.pokemon.forms[0].name}</button>
@@ -12,4 +12,4 @@ function Pokemon(props){
   )
 }
 
-export default Pokemon
+export default Pet

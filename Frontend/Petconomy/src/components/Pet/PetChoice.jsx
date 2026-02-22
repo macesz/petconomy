@@ -19,7 +19,7 @@ function handleClick(event){
   fetchData(path, method, body)
 }
 
-function PokemonChoice(){
+function PetChoice(){
   const [pokemons, setPokemons] = useState([]);
   const [loading, setLoading] = useState(true);
   // const [] = useState();
@@ -68,4 +68,4 @@ function PokemonChoice(){
       )
 }
 
-export default PokemonChoice
+export default PetChoice
