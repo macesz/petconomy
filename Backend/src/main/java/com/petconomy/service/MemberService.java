@@ -2,14 +2,15 @@ package com.petconomy.service;
 
 import com.petconomy.controller.dto.MemberDto;
 import com.petconomy.controller.dto.MemberRegistrationDto;
-import com.petconomy.controller.dto.MyPatDto;
+import com.petconomy.controller.dto.MyPetDto;
 import com.petconomy.controller.exception.MemberNotFoundException;
+import com.petconomy.controller.exception.PetNotFoundException;
 import com.petconomy.model.pet.Pet;
 import com.petconomy.model.user.Member;
 import com.petconomy.model.user.Role;
 import com.petconomy.model.transaction.Transaction;
 import com.petconomy.repository.MemberRepository;
-import com.petconomy.repository.PatRepository;
+import com.petconomy.repository.PetRepository;
 import com.petconomy.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,13 +27,13 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final TransactionRepository transactionRepository;
-    private final PatRepository patRepository;
+    private final PetRepository petRepository;
 
     @Autowired
-    public MemberService(MemberRepository memberRepository, TransactionRepository transactionRepository, PatRepository patRepository ) {
+    public MemberService(MemberRepository memberRepository, TransactionRepository transactionRepository, PetRepository petRepository) {
         this.memberRepository = memberRepository;
         this.transactionRepository = transactionRepository;
-        this.patRepository = patRepository;
+        this.petRepository = petRepository;
     }
 
 
@@ -76,12 +77,12 @@ public class MemberService {
                 .mapToInt(Transaction::getAmount).sum());
     }
 
-    public MyPatDto getMyPat(String email) {
+    public MyPetDto getMyPet(String email) {
         Member member = memberRepository.findMemberByEmail(email)
                 .orElseThrow(MemberNotFoundException::new);
 
-        Pet pet = patRepository.findPetByOwnerId(member.getId()).orElseThrow(MemberNotFoundException::new);
+        Pet pet = petRepository.findPetByOwnerId(member.getId()).orElseThrow(PetNotFoundException::new);
 
-        return new MyPatDto(pet);
+        return new MyPetDto(pet);
     }
 }
