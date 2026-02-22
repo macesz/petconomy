@@ -1,23 +1,29 @@
-package com.petconomy.backend.model.entity;
+package com.petconomy.model.pet;
+
+import com.petconomy.model.user.Member;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
 @Entity
 @NoArgsConstructor
-
+@Getter
+@Setter
 public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private int level = 1;
     private int experience = 0;
-    private  int health = 100;
+    private int health = 100;
     private int energy = 100;
-    private int happiness = 100;
 
+    // Internal currency for potions/items, earned through saving
     private int petGold = 0;
 
     @Enumerated(EnumType.STRING)
@@ -25,18 +31,13 @@ public class Pet {
 
     @OneToOne
     @JoinColumn(name = "user_id")
-    UserEntity owner;
+    private Member owner;
 
     public enum PetType {
-        CAT, FOX, BUNNY, OWL
+        CAT, DOG, DRAGON, OWL
     }
 
-    public Pet(String name, PetType type) {
-        this.name = name;
-        this.type = type;
-    }
-
-    // Example logic for leveling up, need to be improved
+    // Example logic for leveling up
     public void addXp(int amount) {
         this.experience += amount;
         if (this.experience >= 100) {
