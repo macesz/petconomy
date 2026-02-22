@@ -26,16 +26,13 @@ public class Pet {
     // Internal currency for potions/items, earned through saving
     private int petGold = 0;
 
-    @Enumerated(EnumType.STRING)
-    private PetType type;
-
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "owner_id")
     private Member owner;
 
-    public enum PetType {
-        CAT, DOG, DRAGON, OWL
-    }
+    @ManyToOne
+    @JoinColumn(name = "template_id")
+    private PetTemplate template;
 
     // Example logic for leveling up
     public void addXp(int amount) {
