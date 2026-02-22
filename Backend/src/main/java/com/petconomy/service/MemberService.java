@@ -2,11 +2,14 @@ package com.petconomy.service;
 
 import com.petconomy.controller.dto.MemberDto;
 import com.petconomy.controller.dto.MemberRegistrationDto;
+import com.petconomy.controller.dto.MyPatDto;
 import com.petconomy.controller.exception.MemberNotFoundException;
+import com.petconomy.model.pet.Pet;
 import com.petconomy.model.user.Member;
 import com.petconomy.model.user.Role;
 import com.petconomy.model.transaction.Transaction;
 import com.petconomy.repository.MemberRepository;
+import com.petconomy.repository.PatRepository;
 import com.petconomy.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,11 +26,13 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final TransactionRepository transactionRepository;
+    private final PatRepository patRepository;
 
     @Autowired
-    public MemberService(MemberRepository memberRepository, TransactionRepository transactionRepository) {
+    public MemberService(MemberRepository memberRepository, TransactionRepository transactionRepository, PatRepository patRepository ) {
         this.memberRepository = memberRepository;
         this.transactionRepository = transactionRepository;
+        this.patRepository = patRepository;
     }
 
 
@@ -42,36 +47,41 @@ public class MemberService {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    public MemberDto getMember(int id) {
+    public MemberDto getMember(Long id) {
         Member member = memberRepository.getMemberById(id)
                 .orElseThrow(MemberNotFoundException::new);
         return new MemberDto(member);
     }
 
-    public boolean deleteMember(int id) {
+    public boolean deleteMember(Long id) {
         return memberRepository.deleteMemberById(id);
     }
 
     public boolean updateMember(Member member) {
-        return memberRepository.save(member) != null;
+         memberRepository.save(member);
+         return true;
     }
 
     public Member findMemberByEmail(String email){
         return memberRepository.findMemberByEmail(email).orElse(null);
     }
 
-//    public MyPokemonDto getMyPokemon(String email) {
-//        Member member = memberRepository.findMemberByEmail(email)
-//                .orElseThrow(MemberNotFoundException::new);
-//    }
-
-
     public int getMySaving(String email) {
         Member member = memberRepository.findMemberByEmail(email)
                 .orElseThrow(MemberNotFoundException::new);
-        List<Transaction> transactions = transactionRepository.getAllByMember(member).orElse(null);
+        List<Transaction> transactions = transactionRepository.getAllByMember(member).orElse(List.of());
+
         return member.getTargetAmount().intValue()-(transactions
                 .stream()
                 .mapToInt(Transaction::getAmount).sum());
+    }
+
+    public MyPatDto getMyPat(String email) {
+        Member member = memberRepository.findMemberByEmail(email)
+                .orElseThrow(MemberNotFoundException::new);
+
+        Pet pet = patRepository.findPetByOwnerId(member.getId()).orElseThrow(MemberNotFoundException::new);
+
+        return new MyPatDto(pet);
     }
 }

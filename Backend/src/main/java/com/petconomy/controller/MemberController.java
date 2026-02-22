@@ -72,12 +72,12 @@ public class MemberController {
     }
 
     @GetMapping("/{id}")
-    public MemberDto getUser(@PathVariable int id) {
+    public MemberDto getUser(@PathVariable Long id) {
         return memberService.getMember(id);
     }
 
     @DeleteMapping("/{id}")
-    public boolean deleteUser(@PathVariable int id) {
+    public boolean deleteUser(@PathVariable Long id) {
         return memberService.deleteMember(id);
     }
 

@@ -8,9 +8,9 @@ import java.util.Optional;
 
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    boolean deleteMemberById(int id);
+    boolean deleteMemberById(Long id);
 
-    Optional<Member> getMemberById(int id);
+    Optional<Member> getMemberById(Long id);
 
     Optional<Member> getMemberByEmailAndPassword(String email, String password);
 
