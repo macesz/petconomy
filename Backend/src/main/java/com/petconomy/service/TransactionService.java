@@ -22,14 +22,12 @@ import java.util.*;
 public class TransactionService {
     private final TransactionRepository transactionRepository;
     private final MemberRepository memberRepository;
-    private final MemberService memberService;
     private final CategoryRepository categoryRepository;
 
     @Autowired
-    public TransactionService(TransactionRepository transactionRepository, MemberRepository memberRepository, MemberService memberService, CategoryRepository categoryRepository) {
+    public TransactionService(TransactionRepository transactionRepository, MemberRepository memberRepository, CategoryRepository categoryRepository) {
         this.transactionRepository = transactionRepository;
         this.memberRepository = memberRepository;
-        this.memberService = memberService;
         this.categoryRepository = categoryRepository;
     }
 
@@ -67,7 +65,7 @@ public class TransactionService {
         Member member = memberRepository.findMemberByEmail(email)
                 .orElseThrow(MemberNotFoundException::new);
 
-        Category category = categoryRepository.getCategoryById(transactionDto.categoryId())
+        Category category = categoryRepository.findById(transactionDto.categoryId())
                 .orElseThrow(CategoryNotFoundException::new);
         LocalDate date = LocalDate.now();
         Transaction transaction = new Transaction(transactionDto);

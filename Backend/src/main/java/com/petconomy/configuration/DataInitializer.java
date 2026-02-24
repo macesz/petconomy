@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.math.BigDecimal;
 
@@ -17,6 +18,7 @@ import java.math.BigDecimal;
 public class DataInitializer {
 
     @Bean
+    @Order(1)
     public CommandLineRunner initCategories(CategoryRepository categoryRepository) {
         return args -> {
             // Only populate if empty
@@ -31,13 +33,13 @@ public class DataInitializer {
 
     @Bean
     @Order(2)
-    public CommandLineRunner initDummyMember(MemberRepository memberRepository, PetRepository petRepository) {
+    public CommandLineRunner initDummyMember(MemberRepository memberRepository, PetRepository petRepository, PasswordEncoder passwordEncoder) {
         return args -> {
             if (memberRepository.count() == 0) {
                 Member testUser = new Member();
                 testUser.setName("DopamineGamer");
                 testUser.setEmail("test@petconomy.com");
-                testUser.setPassword("pas1234");
+                testUser.setPassword(passwordEncoder.encode("pas1234"));
                 testUser.setTargetAmount(new BigDecimal(1000));// Ensure this matches your security
                 memberRepository.save(testUser);
 
