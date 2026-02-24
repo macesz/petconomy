@@ -1,8 +1,10 @@
 package com.petconomy.model.transaction;
+import com.petconomy.model.user.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -15,37 +17,51 @@ public class Category {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, unique = true)
+    @Column()
     private CategoryType type;
 
-    private String description;
+    private boolean defaultValue;
+
+    private String name;
 
     private String color;
 
+    private BigDecimal targetAmount;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
+
     public Category() {
     }
+
     public Category(CategoryType type) {
         this.type = type;
-        description = type.description;
-        color = type.color;
+        this.name = type.name;
+        this.color = type.color;
+        this.defaultValue = true;
     }
 
-    public Category(CategoryType type, String description) {
-        this.type = type;
-        this.description = description;
+    public Category(String name, String color, Member member) {
+        this.name = name;
+        this.color = (color == null || color.isEmpty() ? CategoryType.OTHER.color : color );
+        this.defaultValue = false;
+        this.type = null;
+        this.member = member;
     }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Category category = (Category) o;
-        return id == category.id && type == category.type;
+        return Objects.equals(id, category.id) && Objects.equals(name, category.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type);
+        return Objects.hash(id, name);
     }
 
     @Override
@@ -53,7 +69,7 @@ public class Category {
         return "Category{" +
                 "id=" + id +
                 ", type=" + type +
-                ", description='" + description + '\'' +
+                ", description='" + name + '\'' +
                 '}';
     }
 
@@ -67,6 +83,8 @@ public class Category {
             PETS("Pets", "#FF69B4"),
             INSURANCE("Insurance", "#00CED1"),
             SAVINGS("Savings", "#7FFF00"),
+            INVESTMENT("Investment", "#FF8C00"),
+            LOAN("Loan", "#BA55D3"),
             RENT("Rent", "#DC143C"),
             UTILITIES("Utilities", "#4682B4"),
             DINING_OUT("Dining out", "#FFA07A"),
@@ -76,16 +94,15 @@ public class Category {
             EDUCATION("Education", "#00FF7F"),
             PERSONAL_CARE("Personal care", "#FF6347"),
             MISCELLANEOUS("Miscellaneous", "#708090"),
-            LOAN("Loan", "#B22222"),
             PAYMENTS("Payments", "#A9A9A9"),
             FEES("Fees", "#CD853F"),
             OTHER("Other", "#696969");
 
-        private final String description;
+        private final String name;
         private final String color;
 
-        CategoryType(String description, String color) {
-            this.description = description;
+        CategoryType(String name, String color) {
+            this.name = name;
             this.color = color;
         }
     }
